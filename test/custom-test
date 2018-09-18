@@ -1,0 +1,18 @@
+const Cacheman = require('../node/index');
+// import Cacheman from '../lib/index';
+
+const config = {
+    enabled: true,
+    host: 'seewotest',
+    port: 39999,
+    engine: 'alluxio', // memory, file, redis, moogodb,
+    tmpDir: '/tmpDir', // 仅当type 为 fs时有效
+    ttl: 60 * 60 * 24 * 30 // 毫秒, 默认30天
+}
+const cache = new Cacheman(config);
+
+cache.set('key1', {value: 'value'}, err => {
+    console.log(err);
+    cache.get('key1', val => console.log(val));
+});
+
